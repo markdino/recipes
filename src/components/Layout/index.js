@@ -1,5 +1,6 @@
-import Header from "../Header";
 import styled from "styled-components";
+import Header from "../Header";
+import Footer from "../Footer";
 
 const Main = styled.main`
   background-color: #fffedf;
@@ -12,6 +13,7 @@ const Layout = ({ children }) => {
     <Main>
       <Header />
       {children}
+      <Footer />
     </Main>
   );
 };

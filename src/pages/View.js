@@ -16,7 +16,7 @@ const Thumbnail = styled.header`
   max-height: 500px;
   min-height: 400px;
   border-radius: 10px;
-  margin: 20px 0px;
+  margin-bottom: 20px;
   background-image: url(${(props) => props?.bgImg || imgPlaceholder});
   background-size: cover;
   background-position: center center;
@@ -60,7 +60,7 @@ const View = () => {
     }
   }, [recipeId]);
   return (
-    <Container>
+    <Container className="pt-3 pb-5">
       {!recipe ? (
         <Message>Loading...</Message>
       ) : (
