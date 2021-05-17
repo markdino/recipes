@@ -109,7 +109,7 @@ const Card = ({
         </Content>
         <Img
           src={
-            imgSrc.includes('https://') || imgSrc.includes('http://')
+            imgSrc?.includes('https://') || imgSrc?.includes('http://')
               ? imgSrc
               : imgSrc
               ? `${API_URI}/${imgSrc}`

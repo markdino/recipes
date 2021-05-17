@@ -92,7 +92,7 @@ export const Item = ({
   return (
     <ItemContainer
       bgImg={`${
-        images?.full.includes('https://') || images?.full.includes('http://')
+        images?.full?.includes('https://') || images?.full?.includes('http://')
           ? ''
           : `${API_URI}/`
       }${images?.full || images?.medium || images?.small}`}

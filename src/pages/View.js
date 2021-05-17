@@ -68,8 +68,8 @@ const View = () => {
         <>
           <Thumbnail
             bgImg={`${
-              recipe.images.full.includes('https://') ||
-              recipe.images.full.includes('http://')
+              recipe.images.full?.includes('https://') ||
+              recipe.images.full?.includes('http://')
                 ? ''
                 : `${API_URI}/`
             }${
