@@ -64,7 +64,7 @@ const AddUpdateModal = ({
       directions: directions,
     }
     if (updateItem) {
-      payload.editDate = moment().format('MMMM Do YYYY, h:mm:ss a')
+      payload.editDate = moment().format('MM/DD/YYYY, h:mm:ss a')
       axios
         .put(`${API_URI}/recipes/${updateItem.uuid}`, payload)
         .then(() => {
