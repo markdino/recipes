@@ -400,7 +400,7 @@ const AddUpdateModal = ({
                         const filterInstruction = directions.filter(
                           (current) => current !== instruction
                         )
-                        setIngredients(filterInstruction)
+                        setDirections(filterInstruction)
                       }}
                     >
                       x
