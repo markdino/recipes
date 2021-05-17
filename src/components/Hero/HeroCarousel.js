@@ -1,15 +1,15 @@
-import Carousel from "react-multi-carousel";
-import { Container } from "reactstrap";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import imgPlaceholder from "../../assets/recipe_placeholder.jpg";
+import Carousel from 'react-multi-carousel'
+import { Container } from 'reactstrap'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+import imgPlaceholder from '../../assets/recipe_placeholder.jpg'
 
 const responsive = {
   singleBreakpoint: {
     breakpoint: { max: 5000, min: 0 },
     items: 1,
   },
-};
+}
 
 const HeroCarousel = ({ children }) => {
   return (
@@ -21,14 +21,14 @@ const HeroCarousel = ({ children }) => {
       showDots={false}
       infinite
       autoPlaySpeed={5000}
-      customTransition="800ms ease-in-out"
+      customTransition='800ms ease-in-out'
     >
       {children}
     </Carousel>
-  );
-};
+  )
+}
 
-export default HeroCarousel;
+export default HeroCarousel
 
 const ItemContainer = styled.section`
   position: relative;
@@ -43,7 +43,7 @@ const ItemContainer = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-`;
+`
 const ItemContent = styled.article`
   padding: 30px;
   border-radius: 20px;
@@ -64,7 +64,7 @@ const ItemContent = styled.article`
     font-size: 0.8rem;
     margin-bottom: 15px;
   }
-`;
+`
 
 const Button = styled.a`
   background-color: #be433c;
@@ -77,7 +77,7 @@ const Button = styled.a`
   &:hover {
     background-color: #cf362e;
   }
-`;
+`
 
 export const Item = ({
   uuid,
@@ -88,10 +88,14 @@ export const Item = ({
   prepTime,
   cookTime,
 }) => {
-  const API_URI = process.env.REACT_APP_API_URI;
+  const API_URI = process.env.REACT_APP_API_URI
   return (
     <ItemContainer
-      bgImg={`${API_URI}/${images?.full || images?.medium || images?.small}`}
+      bgImg={`${
+        images?.full.includes('https://') || images?.full.includes('http://')
+          ? ''
+          : `${API_URI}/`
+      }${images?.full || images?.medium || images?.small}`}
     >
       <Container>
         <ItemContent>
@@ -108,5 +112,5 @@ export const Item = ({
         </ItemContent>
       </Container>
     </ItemContainer>
-  );
-};
+  )
+}

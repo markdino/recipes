@@ -67,7 +67,12 @@ const View = () => {
       ) : (
         <>
           <Thumbnail
-            bgImg={`${API_URI}/${
+            bgImg={`${
+              recipe.images.full.includes('https://') ||
+              recipe.images.full.includes('http://')
+                ? ''
+                : `${API_URI}/`
+            }${
               recipe.images.full || recipe.images.medium || recipe.images.small
             }`}
           >
@@ -93,8 +98,8 @@ const View = () => {
               <ContentWrapper bgColor='#ebebeb'>
                 <ContentHeader>Ingredients</ContentHeader>
                 <ul>
-                  {recipe.ingredients.map((ingredient) => (
-                    <li key={ingredient.uuid}>
+                  {recipe.ingredients.map((ingredient, index) => (
+                    <li key={ingredient.uuid || `${ingredient.name}-${index}`}>
                       {`${ingredient.name} - ${ingredient.amount} ${ingredient.measurement}`}
                     </li>
                   ))}

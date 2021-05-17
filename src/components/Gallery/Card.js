@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import imgPlaceholder from "../../assets/recipe_placeholder.jpg";
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+import imgPlaceholder from '../../assets/recipe_placeholder.jpg'
 
 const Wrapper = styled.section`
   width: 100%;
@@ -24,7 +24,7 @@ const Wrapper = styled.section`
       color: #fff;
     }
   }
-`;
+`
 const Img = styled.img`
   position: relative;
   width: 150px;
@@ -42,7 +42,7 @@ const Img = styled.img`
     z-index: 1000;
     box-shadow: 0 8px 6px rgba(0, 0, 0, 0.2);
   }
-`;
+`
 
 const Content = styled.section`
   height: 100%;
@@ -72,12 +72,12 @@ const Content = styled.section`
     color: #6c757d;
     transition: all ease-in-out 0.4s;
   }
-`;
+`
 
 const CardLink = styled.a`
   text-decoration: none;
   color: inherit;
-`;
+`
 
 const Card = ({
   uuid,
@@ -90,8 +90,8 @@ const Card = ({
   postDate,
   editDate,
 }) => {
-  const API_URI = process.env.REACT_APP_API_URI;
-  const imgSrc = images.medium || images.full;
+  const API_URI = process.env.REACT_APP_API_URI
+  const imgSrc = images.medium || images.full
   return (
     <CardLink as={Link} to={`/view/${uuid}`}>
       <Wrapper>
@@ -105,12 +105,20 @@ const Card = ({
               <li>{`Cooking time: ${cookTime} mins.`}</li>
             </ul>
           </section>
-          <section className="date">{editDate || postDate}</section>
+          <section className='date'>{editDate || postDate}</section>
         </Content>
-        <Img src={imgSrc ? `${API_URI}/${imgSrc}` : imgPlaceholder} />
+        <Img
+          src={
+            imgSrc.includes('https://') || imgSrc.includes('http://')
+              ? imgSrc
+              : imgSrc
+              ? `${API_URI}/${imgSrc}`
+              : imgPlaceholder
+          }
+        />
       </Wrapper>
     </CardLink>
-  );
-};
+  )
+}
 
-export default Card;
+export default Card
