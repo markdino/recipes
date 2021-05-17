@@ -428,7 +428,7 @@ const AddUpdateModal = ({
                       [e.target.name]: e.target.value,
                     })
                   }
-                  value={formFields.instruction}
+                  value={formFields.instructions}
                 />
               </InputGroup>
             </Col>
