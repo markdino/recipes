@@ -75,6 +75,7 @@ const Dashboard = () => {
           )
         )
         setLoadingRecipes(false)
+        setErrorRecipes(false)
       })
       .catch((e) => {
         setLoadingRecipes(false)
@@ -90,6 +91,7 @@ const Dashboard = () => {
       .then((payload) => {
         setSpecials(payload.data)
         setLoadingSpecials(false)
+        setErrorSpecials(false)
       })
       .catch((e) => {
         setLoadingSpecials(false)
