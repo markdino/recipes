@@ -42,10 +42,10 @@ const Recipes = ({ data, handleUpdate }) => {
         </tr>
       </thead>
       <tbody>
-        {data.map((recipe) => {
+        {data.map((recipe, index) => {
           const { uuid, title, description, editDate, postDate } = recipe
           return (
-            <tr key={uuid}>
+            <tr key={uuid || index}>
               <th scope='row'>
                 <NameLink as={Link} to={`/view/${uuid}`}>
                   {title}

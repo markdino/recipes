@@ -24,7 +24,7 @@ const Specials = ({ items }) => {
       <ListContainer>
         {!_.isEmpty(items) ? (
           items.map((item, index, arr) => (
-            <li>
+            <li key={index}>
               <Item {...item} isLast={index + 1 === arr.length} />
             </li>
           ))

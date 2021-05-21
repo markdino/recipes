@@ -30,7 +30,14 @@ const Gallery = ({ items }) => {
             <Alert color='secondary'>Recipes is Empty</Alert>
           ) : (
             items.map((item) => (
-              <Col lg={4} md={6} sm={10} xs={11} className='mx-md-0 mx-auto'>
+              <Col
+                key={item.uuid}
+                lg={4}
+                md={6}
+                sm={10}
+                xs={11}
+                className='mx-md-0 mx-auto'
+              >
                 <Card {...item} key={item.uuid} />
               </Col>
             ))
