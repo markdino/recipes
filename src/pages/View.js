@@ -15,7 +15,7 @@ const Thumbnail = styled.header`
   min-height: 400px;
   border-radius: 10px;
   margin-bottom: 20px;
-  background-image: url(${(props) => props?.bgImg || imgPlaceholder});
+  background-image: url(${(props) => props?.bgImg});
   background-size: cover;
   background-position: center center;
   display: flex;
@@ -48,6 +48,8 @@ const View = () => {
   const [recipe, setRecipe] = useState(null)
   const match = useRouteMatch()
   const recipeId = get(match, 'params.recipeId', '')
+  const thumbnail =
+    recipe?.images?.full || recipe?.images?.medium || recipe?.images?.small
 
   useEffect(() => {
     if (recipeId) {
@@ -65,14 +67,16 @@ const View = () => {
       ) : (
         <>
           <Thumbnail
-            bgImg={`${
-              recipe.images.full?.includes('https://') ||
-              recipe.images.full?.includes('http://')
-                ? ''
-                : `${API_URI}/`
-            }${
-              recipe.images.full || recipe.images.medium || recipe.images.small
-            }`}
+            bgImg={
+              thumbnail
+                ? `${
+                    thumbnail?.includes('https://') ||
+                    thumbnail?.includes('http://')
+                      ? ''
+                      : `${API_URI}/`
+                  }${thumbnail}`
+                : imgPlaceholder
+            }
           >
             <HeaderContent>
               <h2>{recipe.title}</h2>
