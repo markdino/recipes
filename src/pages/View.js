@@ -56,7 +56,7 @@ const View = () => {
       axios
         .get(`${API_URI}/recipes/${recipeId}`)
         .then((payload) => setRecipe(payload.data))
-        .catch((e) => console.warn('Request Error: ', e))
+        .catch((e) => console.error('Request Error: ', e))
     }
     return () => console.info('Cleaning view page...')
   }, [recipeId])

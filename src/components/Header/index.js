@@ -1,4 +1,4 @@
-import { Container, Row, Col, NavbarBrand } from 'reactstrap'
+import { Container, Row, Col } from 'reactstrap'
 import styled from 'styled-components'
 import bgHeader from '../../assets/header.jpg'
 
@@ -12,7 +12,6 @@ const MainHeader = styled.header`
 
   .wrapper {
     padding: 40px 20px 20px;
-    border: none;
     border-bottom: 3px dashed #643d01;
   }
 `

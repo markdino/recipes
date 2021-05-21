@@ -4,7 +4,6 @@ import {
   Collapse,
   Navbar as MainNav,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   Container,
 } from 'reactstrap'
@@ -18,7 +17,6 @@ const NavItem = styled.li.attrs({
   className: 'nav-item px-lg-3 text-lg-start text-center',
 })`
   padding: 0px 30px;
-  /* font-size: 0.8rem; */
   background-color: transparent;
 `
 const NavLink = styled.a.attrs({

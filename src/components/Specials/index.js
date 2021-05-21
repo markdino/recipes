@@ -29,7 +29,7 @@ const Specials = ({ items }) => {
             </li>
           ))
         ) : (
-          <h3>Coming Soon...c</h3>
+          <h3>Coming Soon...</h3>
         )}
       </ListContainer>
     </Main>
