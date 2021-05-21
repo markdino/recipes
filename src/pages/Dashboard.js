@@ -12,8 +12,8 @@ import {
 } from 'reactstrap'
 import classnames from 'classnames'
 import styled from 'styled-components'
-import axios from 'axios'
 import _ from 'lodash'
+import { getAllRecipesRequest, getAllSpecialsRequest } from '../api/Request'
 
 import Recipes from '../components/Tables/Recipes'
 import Specials from '../components/Tables/Specials'
@@ -41,7 +41,6 @@ const Content = styled.div`
 `
 
 const Dashboard = () => {
-  const API_URI = process.env.REACT_APP_API_URI
   const [recipes, setRecipes] = useState([])
   const [loadingRecipes, setLoadingRecipes] = useState(false)
   const [errorRecipes, setErrorRecipes] = useState(false)
@@ -58,10 +57,9 @@ const Dashboard = () => {
   }
 
   const getRecipes = () => {
-    setLoadingRecipes(true)
-    axios
-      .get(`${API_URI}/recipes`)
-      .then((payload) => {
+    getAllRecipesRequest({
+      onRequest: () => setLoadingRecipes(true),
+      onSuccess: (payload) => {
         setRecipes(
           _.orderBy(
             payload.data,
@@ -76,28 +74,27 @@ const Dashboard = () => {
         )
         setLoadingRecipes(false)
         setErrorRecipes(false)
-      })
-      .catch((e) => {
+      },
+      onFailed: () => {
         setLoadingRecipes(false)
         setErrorRecipes(true)
-        console.error('Recipes Request', e)
-      })
+      },
+    })
   }
 
   const getSpecials = () => {
-    setLoadingSpecials(true)
-    axios
-      .get(`${API_URI}/specials`)
-      .then((payload) => {
+    getAllSpecialsRequest({
+      onRequest: () => setLoadingSpecials(true),
+      onSuccess: (payload) => {
         setSpecials(payload.data)
         setLoadingSpecials(false)
         setErrorSpecials(false)
-      })
-      .catch((e) => {
+      },
+      onFailed: () => {
         setLoadingSpecials(false)
         setErrorSpecials(true)
-        console.error('Specials Request', e)
-      })
+      },
+    })
   }
 
   useEffect(() => {

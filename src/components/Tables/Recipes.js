@@ -3,7 +3,7 @@ import { Table, Alert, Button } from 'reactstrap'
 import _ from 'lodash'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
+import { deleteRecipeRequest } from '../../api/Request'
 
 import DeleteModal from './Modal/DeleteModal'
 import AddUpdateRecipeModal from './Modal/AddUpdateRecipeModal'
@@ -17,18 +17,18 @@ const ActionButton = styled.button`
 `
 
 const Recipes = ({ data, handleUpdate }) => {
-  const API_URI = process.env.REACT_APP_API_URI
   const [deleteItem, setDeleteItem] = useState(null)
   const [updateItem, setUpdateItem] = useState(null)
   const [toggleDelete, setToggleDelete] = useState(false)
   const [toggleAddUpdate, setToggleAddUpdate] = useState(false)
 
   const handleDelete = () => {
-    axios
-      .delete(`${API_URI}/recipes/${deleteItem.id}`)
-      .then(() => handleUpdate())
-      .catch((e) => console.error('Recipe Delete Request', e))
+    deleteRecipeRequest({
+      id: deleteItem.id,
+      onSuccess: () => handleUpdate(),
+    })
   }
+
   return _.isEmpty(data) ? (
     <Alert color='secondary'>Recipes is Empty</Alert>
   ) : (

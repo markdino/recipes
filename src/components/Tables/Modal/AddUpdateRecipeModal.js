@@ -18,9 +18,9 @@ import {
 } from 'reactstrap'
 import _ from 'lodash'
 import styled from 'styled-components'
-import axios from 'axios'
 import moment from 'moment'
 import { v4 as uuidv4 } from 'uuid'
+import { addRecipeRequest, updateRecipeRequest } from '../../../api/Request'
 
 const RemoveButton = styled.button.attrs({
   title: 'Remove item',
@@ -40,10 +40,10 @@ const AddUpdateModal = ({
   onSuccess,
 }) => {
   const closeBtn = <button className='d-none'>&times;</button>
-  const API_URI = process.env.REACT_APP_API_URI
   const [formFields, setFormFields] = useState({})
   const [ingredients, setIngredients] = useState([])
   const [directions, setDirections] = useState([])
+  const currentDate = moment().format('MM/DD/YYYY h:mm:ss A')
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -63,24 +63,26 @@ const AddUpdateModal = ({
       ingredients: ingredients,
       directions: directions,
     }
+
     if (updateItem) {
-      payload.editDate = moment().format('MM/DD/YYYY h:mm:ss A')
-      axios
-        .put(`${API_URI}/recipes/${updateItem.uuid}`, payload)
-        .then(() => {
+      payload.editDate = currentDate
+      updateRecipeRequest({
+        id: updateItem.uuid,
+        payload,
+        onSuccess: () => {
           onSuccess()
           handleClose()
-        })
-        .catch((e) => console.error('Recipe Update Request', e))
+        },
+      })
     } else {
-      payload.postDate = moment().format('MMMM Do YYYY, h:mm:ss a')
-      axios
-        .post(`${API_URI}/recipes`, payload)
-        .then(() => {
+      payload.postDate = currentDate
+      addRecipeRequest({
+        payload,
+        onSuccess: () => {
           onSuccess()
           handleClose()
-        })
-        .catch((e) => console.error('Add Recipe Request', e))
+        },
+      })
     }
   }
 

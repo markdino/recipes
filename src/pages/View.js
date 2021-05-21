@@ -4,10 +4,8 @@ import { useRouteMatch } from 'react-router'
 import { Container, Row, Col } from 'reactstrap'
 import styled from 'styled-components'
 import { get } from 'lodash'
-import axios from 'axios'
 import imgPlaceholder from '../assets/recipe_placeholder.jpg'
-
-const API_URI = process.env.REACT_APP_API_URI
+import { API_URI, getRecipeRequest } from '../api/Request'
 
 const Thumbnail = styled.header`
   position: relative;
@@ -53,10 +51,10 @@ const View = () => {
 
   useEffect(() => {
     if (recipeId) {
-      axios
-        .get(`${API_URI}/recipes/${recipeId}`)
-        .then((payload) => setRecipe(payload.data))
-        .catch((e) => console.error('Request Error: ', e))
+      getRecipeRequest({
+        id: recipeId,
+        onSuccess: (payload) => setRecipe(payload.data),
+      })
     }
     return () => console.info('Cleaning view page...')
   }, [recipeId])

@@ -1,25 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import _ from 'lodash'
 import Hero from '../components/Hero'
 import Gallery from '../components/Gallery'
 import Special from '../components/Specials'
 import { Col, Row, Alert } from 'reactstrap'
 import Lorem from '../components/Lorem'
+import { getAllRecipesRequest, getAllSpecialsRequest } from '../api/Request'
 
 const Home = () => {
-  const API_URI = process.env.REACT_APP_API_URI
   const [recipes, setRecipes] = useState([])
   const [loadingRecipes, setLoadingRecipes] = useState(false)
   const [errorRecipes, setErrorRecipes] = useState(false)
   const [specials, setSpecials] = useState([])
 
   useEffect(() => {
-    setLoadingRecipes(true)
-    axios
-      .get(`${API_URI}/recipes`)
-      .then((payload) => {
+    getAllRecipesRequest({
+      onRequest: () => setLoadingRecipes(true),
+      onSuccess: (payload) => {
         setRecipes(
           _.orderBy(
             payload.data,
@@ -33,17 +31,16 @@ const Home = () => {
           )
         )
         setLoadingRecipes(false)
-      })
-      .catch((e) => {
+      },
+      onFailed: () => {
         setLoadingRecipes(false)
         setErrorRecipes(true)
-        console.error('Recipes Request', e)
-      })
+      },
+    })
 
-    axios
-      .get(`${API_URI}/specials`)
-      .then((payload) => setSpecials(payload.data))
-      .catch((e) => console.error('Specials Request ', e))
+    getAllSpecialsRequest({
+      onSuccess: (payload) => setSpecials(payload.data),
+    })
   }, [])
 
   return (
