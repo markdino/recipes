@@ -89,13 +89,18 @@ export const Item = ({
   cookTime,
 }) => {
   const API_URI = process.env.REACT_APP_API_URI
+  const thumbnail = images?.full || images?.medium || images?.small
   return (
     <ItemContainer
-      bgImg={`${
-        images?.full?.includes('https://') || images?.full?.includes('http://')
-          ? ''
-          : `${API_URI}/`
-      }${images?.full || images?.medium || images?.small}`}
+      bgImg={
+        thumbnail
+          ? `${
+              thumbnail.includes('https://') || thumbnail.includes('http://')
+                ? ''
+                : `${API_URI}/`
+            }${thumbnail}`
+          : imgPlaceholder
+      }
     >
       <Container>
         <ItemContent>
