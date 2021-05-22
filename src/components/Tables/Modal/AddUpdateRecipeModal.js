@@ -18,9 +18,9 @@ import {
 } from 'reactstrap'
 import _ from 'lodash'
 import styled from 'styled-components'
-import moment from 'moment'
 import { v4 as uuidv4 } from 'uuid'
 import { addRecipeRequest, updateRecipeRequest } from '../../../api/Request'
+import { writeDateFormat } from '../../../util/Date'
 
 const RemoveButton = styled.button.attrs({
   title: 'Remove item',
@@ -43,7 +43,7 @@ const AddUpdateModal = ({
   const [formFields, setFormFields] = useState({})
   const [ingredients, setIngredients] = useState([])
   const [directions, setDirections] = useState([])
-  const currentDate = moment().format('MM/DD/YYYY h:mm:ss A')
+  const currentDate = writeDateFormat()
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -65,6 +65,7 @@ const AddUpdateModal = ({
     }
 
     if (updateItem) {
+      payload.postDate = updateItem.postDate
       payload.editDate = currentDate
       updateRecipeRequest({
         id: updateItem.uuid,

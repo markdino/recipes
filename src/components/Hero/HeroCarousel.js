@@ -2,6 +2,7 @@ import Carousel from 'react-multi-carousel'
 import { Container } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { API_URI } from '../../api/Request'
 import imgPlaceholder from '../../assets/recipe_placeholder.jpg'
 
 const responsive = {
@@ -88,7 +89,6 @@ export const Item = ({
   prepTime,
   cookTime,
 }) => {
-  const API_URI = process.env.REACT_APP_API_URI
   const thumbnail = images?.full || images?.medium || images?.small
   return (
     <ItemContainer

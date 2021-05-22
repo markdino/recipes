@@ -27,7 +27,7 @@ const Home = () => {
                   ? new Date(object.editDate)
                   : new Date(object.postDate),
             ],
-            ['asc']
+            ['desc']
           )
         )
         setLoadingRecipes(false)

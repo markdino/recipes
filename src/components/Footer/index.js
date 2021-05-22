@@ -1,6 +1,6 @@
-import { Container, Row, Col } from "reactstrap";
-import styled from "styled-components";
-import bgHeader from "../../assets/header.jpg";
+import { Container, Row, Col } from 'reactstrap'
+import styled from 'styled-components'
+import bgHeader from '../../assets/header.jpg'
 
 const MainHeader = styled.footer`
   padding: 5px 0px;
@@ -13,23 +13,23 @@ const MainHeader = styled.footer`
     border-top: 3px dashed #643d01;
     border-bottom: 3px dashed #643d01;
   }
-`;
+`
 
 const Title = styled.h4`
   color: #fff;
-`;
+`
 
 const Sub = styled.p`
   color: rgba(256, 256, 256, 0.7);
   text-transform: uppercase;
   font-size: 0.8rem;
   margin: 0px;
-`;
+`
 
 const Footer = () => {
   return (
     <MainHeader>
-      <section className="wrapper">
+      <section className='wrapper'>
         <Container>
           <Row noGutters>
             <Col>
@@ -37,15 +37,15 @@ const Footer = () => {
               <Sub>The best online recipes</Sub>
             </Col>
             <Col>
-              <p className="text-dark text-end">
+              <Sub className='text-end'>
                 {`All rights reserved | copyright © ${new Date().getFullYear()}`}
-              </p>
+              </Sub>
             </Col>
           </Row>
         </Container>
       </section>
     </MainHeader>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

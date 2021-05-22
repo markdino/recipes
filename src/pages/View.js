@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { get } from 'lodash'
 import imgPlaceholder from '../assets/recipe_placeholder.jpg'
 import { API_URI, getRecipeRequest } from '../api/Request'
+import { readDateFormat } from '../util/Date'
 
 const Thumbnail = styled.header`
   position: relative;
@@ -90,7 +91,7 @@ const View = () => {
                   </ul>
                 </Col>
                 <Col md={6} xs={12} className='d-flex justify-content-end'>
-                  {recipe.editDate || recipe.postDate || ''}
+                  {readDateFormat(recipe.editDate || recipe.postDate)}
                 </Col>
               </Row>
             </HeaderContent>

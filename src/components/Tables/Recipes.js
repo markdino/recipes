@@ -4,6 +4,7 @@ import _ from 'lodash'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { deleteRecipeRequest } from '../../api/Request'
+import { readDateFormat } from '../../util/Date'
 
 import DeleteModal from './Modal/DeleteModal'
 import AddUpdateRecipeModal from './Modal/AddUpdateRecipeModal'
@@ -52,7 +53,11 @@ const Recipes = ({ data, handleUpdate }) => {
                 </NameLink>
               </th>
               <td>{description}</td>
-              <td>{editDate ? `${editDate} - Updated` : postDate}</td>
+              <td>
+                {editDate
+                  ? `${readDateFormat(editDate)} - Updated`
+                  : readDateFormat(postDate)}
+              </td>
               <td>
                 <ActionButton
                   as={Button}

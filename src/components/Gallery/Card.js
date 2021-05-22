@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { API_URI } from '../../api/Request'
+import { readDateFormat } from '../../util/Date'
 import imgPlaceholder from '../../assets/recipe_placeholder.jpg'
 
 const Wrapper = styled.section`
@@ -90,7 +92,6 @@ const Card = ({
   postDate,
   editDate,
 }) => {
-  const API_URI = process.env.REACT_APP_API_URI
   const imgSrc = images.medium || images.full
   return (
     <CardLink as={Link} to={`/view/${uuid}`}>
@@ -105,7 +106,9 @@ const Card = ({
               <li>{`Cooking time: ${cookTime} mins.`}</li>
             </ul>
           </section>
-          <section className='date'>{editDate || postDate}</section>
+          <section className='date'>
+            {readDateFormat(editDate || postDate)}
+          </section>
         </Content>
         <Img
           src={
