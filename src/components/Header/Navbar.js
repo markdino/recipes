@@ -20,11 +20,16 @@ const NavItem = styled.li.attrs({
   background-color: transparent;
 `
 const NavLink = styled.a.attrs({
-  className: 'nav-link',
+  className: 'btn nav-link',
 })`
   color: #fff !important;
   &:hover {
-    color: var(--bs-secondary) !important;
+    background-color: #fff;
+    color: #be433c !important;
+  }
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
   }
 `
 
