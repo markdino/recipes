@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { useRouteMatch } from 'react-router'
-import { Container, Row, Col } from 'reactstrap'
+import { Container, Row, Col, Alert } from 'reactstrap'
 import styled from 'styled-components'
 import { get } from 'lodash'
 import imgPlaceholder from '../assets/recipe_placeholder.jpg'
@@ -42,9 +42,6 @@ const ContentHeader = styled.h3`
   font-weight: bold;
   font-size: 1.2rem;
 `
-const Message = styled.h2.attrs({
-  className: 'text-center text-secondary mt-5',
-})``
 const View = () => {
   const [recipe, setRecipe] = useState(null)
   const match = useRouteMatch()
@@ -64,7 +61,7 @@ const View = () => {
   return (
     <Container className='pt-3 pb-5'>
       {!recipe ? (
-        <Message>Loading...</Message>
+        <Alert color='danger'>Invalid route or no information available.</Alert>
       ) : (
         <>
           <Thumbnail
