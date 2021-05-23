@@ -9,10 +9,17 @@ import {
 } from 'reactstrap'
 import styled from 'styled-components'
 
-const MainNavbar = styled.nav`
+const MainNavbar = styled.nav.attrs({
+  className: 'w-md-auto w-100',
+})`
   background-color: transparent !important;
 `
-
+const Toggler = styled.button`
+  margin: -80px 0px 0px auto;
+`
+const NavRight = styled.div`
+  margin: 1.5rem 0px 0px auto;
+`
 const NavItem = styled.li.attrs({
   className: 'nav-item px-lg-3 text-lg-start text-center',
 })`
@@ -41,9 +48,9 @@ const Navbar = () => {
   return (
     <MainNavbar as={MainNav} color='light' light expand='md'>
       <Container>
-        <NavbarToggler onClick={toggle} />
+        <Toggler as={NavbarToggler} onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          <Nav className='ml-auto mt-4' navbar>
+          <NavRight as={Nav} className='ml-auto mt-4' navbar>
             <NavItem>
               <NavLink as={Link} to='/'>
                 Home
@@ -54,7 +61,7 @@ const Navbar = () => {
                 Dashboard
               </NavLink>
             </NavItem>
-          </Nav>
+          </NavRight>
         </Collapse>
       </Container>
     </MainNavbar>
