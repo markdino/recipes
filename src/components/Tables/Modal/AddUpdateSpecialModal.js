@@ -14,6 +14,7 @@ import {
 } from 'reactstrap'
 import { v4 as uuidv4 } from 'uuid'
 import { addSpecialRequest, updateSpecialRequest } from '../../../api/Request'
+import { CloseBtn } from './components'
 
 const AddUpdateSpecialModal = ({
   show = true,
@@ -21,7 +22,6 @@ const AddUpdateSpecialModal = ({
   handleClose,
   onSuccess,
 }) => {
-  const closeBtn = <button className='d-none'>&times;</button>
   const [formFields, setFormFields] = useState({ type: 'event' })
 
   const handleSubmit = (e) => {
@@ -68,7 +68,7 @@ const AddUpdateSpecialModal = ({
     <Modal isOpen={show} fade={false} toggle={handleClose}>
       <ModalHeader
         toggle={handleClose}
-        close={closeBtn}
+        close={<CloseBtn onClick={handleClose}>&times;</CloseBtn>}
         className='text-capitalize alert-success'
       >
         {`${updateItem ? 'Update' : 'Add'} Item`}

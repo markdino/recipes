@@ -21,6 +21,7 @@ import styled from 'styled-components'
 import { v4 as uuidv4 } from 'uuid'
 import { addRecipeRequest, updateRecipeRequest } from '../../../api/Request'
 import { writeDateFormat } from '../../../util/Date'
+import { CloseBtn } from './components'
 
 const RemoveButton = styled.button.attrs({
   title: 'Remove item',
@@ -39,7 +40,6 @@ const AddUpdateModal = ({
   handleClose,
   onSuccess,
 }) => {
-  const closeBtn = <button className='d-none'>&times;</button>
   const [formFields, setFormFields] = useState({})
   const [ingredients, setIngredients] = useState([])
   const [directions, setDirections] = useState([])
@@ -47,25 +47,37 @@ const AddUpdateModal = ({
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    const {
+      uuid,
+      title,
+      description,
+      imgLarge,
+      imgMedium,
+      imgSmall,
+      servings,
+      prepTime,
+      cookTime,
+      postDate,
+    } = formFields
 
     const payload = {
-      uuid: uuidv4(),
-      title: formFields.title,
-      description: formFields.description,
+      uuid: uuid || uuidv4(),
+      title,
+      description,
       images: {
-        full: formFields.imgLarge,
-        medium: formFields.imgMedium,
-        small: formFields.imgSmall,
+        full: imgLarge,
+        medium: imgMedium,
+        small: imgSmall,
       },
-      servings: formFields.servings,
-      prepTime: formFields.prepTime,
-      cookTime: formFields.cookTime,
-      ingredients: ingredients,
-      directions: directions,
+      servings,
+      prepTime,
+      cookTime,
+      ingredients,
+      directions,
+      postDate,
     }
 
     if (updateItem) {
-      payload.postDate = updateItem.postDate
       payload.editDate = currentDate
       updateRecipeRequest({
         id: updateItem.uuid,
@@ -89,36 +101,48 @@ const AddUpdateModal = ({
 
   useEffect(() => {
     if (updateItem) {
+      const {
+        uuid,
+        title,
+        description,
+        images,
+        servings,
+        prepTime,
+        cookTime,
+        ingredients,
+        directions,
+        postDate,
+      } = updateItem
       setFormFields({
-        title: updateItem.title,
-        description: updateItem.description,
-        imgLarge: updateItem.images.full,
-        imgMedium: updateItem.images.medium,
-        imgSmall: updateItem.images.small,
-        servings: updateItem.servings,
-        prepTime: updateItem.prepTime,
-        cookTime: updateItem.cookTime,
+        uuid,
+        title,
+        description,
+        imgLarge: images.full,
+        imgMedium: images.medium,
+        imgSmall: images.small,
+        servings,
+        prepTime,
+        cookTime,
+        postDate,
       })
-      setIngredients(updateItem.ingredients)
-      setDirections(updateItem.directions)
+      setIngredients(ingredients)
+      setDirections(directions)
     }
   }, [])
 
   const addIngredient = () => {
-    if (
-      !formFields.ingredientName ||
-      !formFields.ingredientAmount ||
-      !formFields.ingredientMeasurement
-    ) {
+    const { ingredientName, ingredientAmount, ingredientMeasurement } =
+      formFields
+    if (!ingredientName) {
       return null
     }
     setIngredients([
       ...ingredients,
       {
         uuid: uuidv4(),
-        name: formFields.ingredientName,
-        amount: formFields.ingredientAmount,
-        measurement: formFields.ingredientMeasurement,
+        name: ingredientName,
+        amount: ingredientAmount,
+        measurement: ingredientMeasurement,
       },
     ])
     setFormFields({
@@ -130,29 +154,19 @@ const AddUpdateModal = ({
   }
 
   const addDirections = () => {
-    if (!formFields.instructions) {
+    const { instructions, optional } = formFields
+    if (!instructions) {
       return null
     }
-    setDirections([
-      ...directions,
-      {
-        uuid: uuidv4(),
-        instructions: formFields.instructions,
-        optional: formFields.optional,
-      },
-    ])
-    setFormFields({
-      ...formFields,
-      instructions: '',
-      optional: false,
-    })
+    setDirections([...directions, { uuid: uuidv4(), instructions, optional }])
+    setFormFields({ ...formFields, instructions: '', optional: false })
   }
 
   return (
     <Modal isOpen={show} fade={false} toggle={handleClose} size='xl'>
       <ModalHeader
         toggle={handleClose}
-        close={closeBtn}
+        close={<CloseBtn onClick={handleClose}>&times;</CloseBtn>}
         className='text-capitalize alert-success'
       >
         {`${updateItem ? 'Update' : 'Add'} Item`}

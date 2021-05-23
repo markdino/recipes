@@ -1,12 +1,12 @@
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
+import { CloseBtn } from './components'
 
 const DeleteModal = ({ show = true, handleClose, handleDelete, itemName }) => {
-  const closeBtn = <button className='d-none'>&times;</button>
   return (
     <Modal isOpen={show} fade={false} toggle={handleClose}>
       <ModalHeader
         toggle={handleClose}
-        close={closeBtn}
+        close={<CloseBtn onClick={handleClose}>&times;</CloseBtn>}
         className='alert-danger'
       >
         Delete Item
