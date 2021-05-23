@@ -4,11 +4,15 @@ const DeleteModal = ({ show = true, handleClose, handleDelete, itemName }) => {
   const closeBtn = <button className='d-none'>&times;</button>
   return (
     <Modal isOpen={show} fade={false} toggle={handleClose}>
-      <ModalHeader toggle={handleClose} close={closeBtn}>
+      <ModalHeader
+        toggle={handleClose}
+        close={closeBtn}
+        className='alert-danger'
+      >
         Delete Item
       </ModalHeader>
       <ModalBody>
-        {`Are you sure you want to delete ${itemName}?`} <br />
+        Are you sure you want to delete <strong>{itemName}</strong>?<br />
         This action is Permanent.
       </ModalBody>
       <ModalFooter>

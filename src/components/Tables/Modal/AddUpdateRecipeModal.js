@@ -153,7 +153,7 @@ const AddUpdateModal = ({
       <ModalHeader
         toggle={handleClose}
         close={closeBtn}
-        className='text-capitalize'
+        className='text-capitalize alert-success'
       >
         {`${updateItem ? 'Update' : 'Add'} Item`}
       </ModalHeader>
