@@ -206,7 +206,7 @@ const AddUpdateModal = ({
             </Col>
           </FormGroup>
           <FormGroup row>
-            <Col xs='4'>
+            <Col sm='4' xs='6'>
               <Label for='servings'>Servings</Label>
               <Input
                 id='servings'
@@ -220,7 +220,7 @@ const AddUpdateModal = ({
                 value={formFields.servings}
               />
             </Col>
-            <Col xs='4'>
+            <Col sm='4' xs='6'>
               <Label for='servings'>Preparation Time</Label>
               <Input
                 id='prepTime'
@@ -234,7 +234,7 @@ const AddUpdateModal = ({
                 value={formFields.prepTime}
               />
             </Col>
-            <Col xs='4'>
+            <Col sm='4' xs='6'>
               <Label for='cookTime'>Coocking Time</Label>
               <Input
                 id='cookTime'
@@ -252,7 +252,7 @@ const AddUpdateModal = ({
           <br />
           <FormGroup>
             <Label>Images</Label>
-            <InputGroup size='sm'>
+            <InputGroup size='sm' className='mb-2'>
               <InputGroupAddon addonType='prepend'>
                 <InputGroupText>Large</InputGroupText>
               </InputGroupAddon>
@@ -268,8 +268,7 @@ const AddUpdateModal = ({
                 value={formFields.imgLarge}
               />
             </InputGroup>
-            <br />
-            <InputGroup size='sm'>
+            <InputGroup size='sm' className='mb-2'>
               <InputGroupAddon addonType='prepend'>
                 <InputGroupText>Medium</InputGroupText>
               </InputGroupAddon>
@@ -285,8 +284,7 @@ const AddUpdateModal = ({
                 value={formFields.imgMedium}
               />
             </InputGroup>
-            <br />
-            <InputGroup size='sm'>
+            <InputGroup size='sm' className='mb-2'>
               <InputGroupAddon addonType='prepend'>
                 <InputGroupText>Small</InputGroupText>
               </InputGroupAddon>
@@ -302,7 +300,6 @@ const AddUpdateModal = ({
                 value={formFields.imgSmall}
               />
             </InputGroup>
-            <br />
           </FormGroup>
           <br />
           <Label>Ingredients</Label>
@@ -336,8 +333,8 @@ const AddUpdateModal = ({
             )}
           </Alert>
           <FormGroup row>
-            <Col xs='5'>
-              <InputGroup size='sm'>
+            <Col md='5' xs='12'>
+              <InputGroup size='sm' className='mb-2'>
                 <InputGroupAddon addonType='prepend'>
                   <InputGroupText>Name</InputGroupText>
                 </InputGroupAddon>
@@ -354,8 +351,8 @@ const AddUpdateModal = ({
                 />
               </InputGroup>
             </Col>
-            <Col xs='2'>
-              <InputGroup size='sm'>
+            <Col md='2' xs='5'>
+              <InputGroup size='sm' className='mb-2'>
                 <InputGroupAddon addonType='prepend'>
                   <InputGroupText>Amount</InputGroupText>
                 </InputGroupAddon>
@@ -372,8 +369,8 @@ const AddUpdateModal = ({
                 />
               </InputGroup>
             </Col>
-            <Col xs='4'>
-              <InputGroup size='sm'>
+            <Col md='4' xs='7'>
+              <InputGroup size='sm' className='mb-2'>
                 <InputGroupAddon addonType='prepend'>
                   <InputGroupText>Measurement</InputGroupText>
                 </InputGroupAddon>
@@ -390,7 +387,7 @@ const AddUpdateModal = ({
                 />
               </InputGroup>
             </Col>
-            <Col xs='1'>
+            <Col md='1' xs='12'>
               <Button color='primary' onClick={addIngredient}>
                 Add
               </Button>
@@ -431,7 +428,7 @@ const AddUpdateModal = ({
             )}
           </Alert>
           <FormGroup row>
-            <Col xs='11'>
+            <Col md='11' xs='12'>
               <InputGroup size='sm'>
                 <InputGroupAddon addonType='prepend'>
                   <InputGroupText>Instruction</InputGroupText>
@@ -448,26 +445,27 @@ const AddUpdateModal = ({
                   value={formFields.instructions}
                 />
               </InputGroup>
+              <Label check>
+                <Input
+                  type='checkbox'
+                  name='optional'
+                  onChange={(e) => {
+                    setFormFields({
+                      ...formFields,
+                      [e.target.name]: e.target.checked,
+                    })
+                  }}
+                  checked={formFields.optional}
+                />{' '}
+                Optional
+              </Label>
+              <br />
             </Col>
-            <Col xs='1'>
+            <Col md='1' xs='12'>
               <Button color='primary' onClick={addDirections}>
                 Add
               </Button>
             </Col>
-            <Label check>
-              <Input
-                type='checkbox'
-                name='optional'
-                onChange={(e) => {
-                  setFormFields({
-                    ...formFields,
-                    [e.target.name]: e.target.checked,
-                  })
-                }}
-                checked={formFields.optional}
-              />{' '}
-              Optional
-            </Label>
           </FormGroup>
         </ModalBody>
         <ModalFooter>

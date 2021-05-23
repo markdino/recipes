@@ -12,7 +12,10 @@ import AddUpdateRecipeModal from './Modal/AddUpdateRecipeModal'
 const NameLink = styled.a.attrs({
   className: 'btn-link',
 })``
-
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+`
 const ActionButton = styled.button`
   margin: 0px 5px;
 `
@@ -59,30 +62,32 @@ const Recipes = ({ data, handleUpdate }) => {
                   : readDateFormat(postDate)}
               </td>
               <td>
-                <ActionButton
-                  as={Button}
-                  color='info'
-                  size='sm'
-                  title='Edit'
-                  onClick={() => {
-                    setUpdateItem(recipe)
-                    setToggleAddUpdate(true)
-                  }}
-                >
-                  Edit
-                </ActionButton>
-                <ActionButton
-                  as={Button}
-                  color='danger'
-                  size='sm'
-                  title='Delete'
-                  onClick={() => {
-                    setDeleteItem({ id: uuid, name: title })
-                    setToggleDelete(true)
-                  }}
-                >
-                  Delete
-                </ActionButton>
+                <ButtonWrapper>
+                  <ActionButton
+                    as={Button}
+                    color='info'
+                    size='sm'
+                    title='Edit'
+                    onClick={() => {
+                      setUpdateItem(recipe)
+                      setToggleAddUpdate(true)
+                    }}
+                  >
+                    Edit
+                  </ActionButton>
+                  <ActionButton
+                    as={Button}
+                    color='danger'
+                    size='sm'
+                    title='Delete'
+                    onClick={() => {
+                      setDeleteItem({ id: uuid, name: title })
+                      setToggleDelete(true)
+                    }}
+                  >
+                    Delete
+                  </ActionButton>
+                </ButtonWrapper>
               </td>
             </tr>
           )
