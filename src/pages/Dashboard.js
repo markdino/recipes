@@ -18,6 +18,7 @@ import { getAllRecipesRequest, getAllSpecialsRequest } from '../api/Request'
 import Recipes from '../components/Tables/Recipes'
 import Specials from '../components/Tables/Specials'
 import AddUpdateRecipeModal from '../components/Tables/Modal/AddUpdateRecipeModal'
+import AddUpdateSpecialModal from '../components/Tables/Modal/AddUpdateSpecialModal'
 
 const Main = styled.main`
   padding: 20px 0px 40px;
@@ -86,7 +87,7 @@ const Dashboard = () => {
     getAllSpecialsRequest({
       onRequest: () => setLoadingSpecials(true),
       onSuccess: (payload) => {
-        setSpecials(payload.data)
+        setSpecials(_.reverse(payload.data))
         setLoadingSpecials(false)
         setErrorSpecials(false)
       },
@@ -169,10 +170,19 @@ const Dashboard = () => {
         </Content>
       </Container>
       {showAddModal && (
-        <AddUpdateRecipeModal
-          onSuccess={() => getRecipes()}
-          handleClose={() => setShowAddModal(!showAddModal)}
-        />
+        <>
+          {activeTab === '1' ? (
+            <AddUpdateRecipeModal
+              onSuccess={() => getRecipes()}
+              handleClose={() => setShowAddModal(!showAddModal)}
+            />
+          ) : (
+            <AddUpdateSpecialModal
+              onSuccess={() => getSpecials()}
+              handleClose={() => setShowAddModal(!showAddModal)}
+            />
+          )}
+        </>
       )}
     </Main>
   )

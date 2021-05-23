@@ -125,3 +125,58 @@ export const getSpecialRequest = ({
       console.error('Special Request', e)
     })
 }
+
+export const deleteSpecialRequest = ({
+  id,
+  onRequest = () => null,
+  onSuccess = () => null,
+  onFailed = () => null,
+}) => {
+  onRequest()
+  axios
+    .delete(`${API_URI}/specials/${id}`)
+    .then((payload) => {
+      onSuccess(payload)
+    })
+    .catch((e) => {
+      onFailed(e)
+      console.error('Special Delete Request', e)
+    })
+}
+
+export const updateSpecialRequest = ({
+  id,
+  payload,
+  onRequest = () => null,
+  onSuccess = () => null,
+  onFailed = () => null,
+}) => {
+  onRequest()
+  axios
+    .put(`${API_URI}/specials/${id}`, payload)
+    .then((newPayload) => {
+      onSuccess(newPayload)
+    })
+    .catch((e) => {
+      onFailed(e)
+      console.error('Special Update Request', e)
+    })
+}
+
+export const addSpecialRequest = ({
+  payload,
+  onRequest = () => null,
+  onSuccess = () => null,
+  onFailed = () => null,
+}) => {
+  onRequest()
+  axios
+    .post(`${API_URI}/specials`, payload)
+    .then((newPayload) => {
+      onSuccess(newPayload)
+    })
+    .catch((e) => {
+      onFailed(e)
+      console.error('Special Add Request', e)
+    })
+}
